@@ -5,6 +5,7 @@ import DashboardVue from '../views/Dashboard.vue'
 import LoginVue from '../views/Login.vue'
 import RegisterVue from '../views/Register.vue'
 import SurveyVue from '../views/Surveys.vue'
+import AuthComponent from '../components/AuthComponent.vue'
 import store from '../store'
 
 const routes = [
@@ -18,8 +19,16 @@ const routes = [
       { path: '/surveys', name: 'Survey', component: SurveyVue }
     ]
   },
-  { path: '/register', name: 'Register', component: RegisterVue },
-  { path: '/login', name: 'Login', component: LoginVue },
+  {
+    path: '/auth',
+    redirect: '/login',
+    meta: { isGuest: true },
+    component: AuthComponent,
+    children: [
+      { path: '/register', name: 'Register', component: RegisterVue },
+      { path: '/login', name: 'Login', component: LoginVue },
+    ]
+  }
 ]
 
 const router = createRouter({
@@ -30,7 +39,7 @@ const router = createRouter({
 router.beforeEach((to, from) => {
   if (to.meta.requiresAuth && !store.state.user.user.token) {
     return { name: 'Login' }
-  } else if (store.state.user.user.token && (to.name === 'Login' || to.name === 'Register')) {
+  } else if (store.state.user.user.token && to.meta.isGuest) {
     return { name: 'Dashboard' }
   } else {
     return true
