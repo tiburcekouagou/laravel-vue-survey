@@ -1,6 +1,3 @@
-import axios from "axios";
-import axiosClient from "../../axios";
-
 export default {
   state: {
     user: {
@@ -11,31 +8,42 @@ export default {
   getters: {},
   actions: {
     login({ commit }, user) {
-      return axiosClient.post('/login', user)
-        .then(({ data }) => {
-          commit('setUser', data)
-          return data;
-        })
+      return fetch('http://localhost:8000/api/login', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(user),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          commit('setUser', res);
+          return res;
+        });
     },
     register({ commit }, user) {
-      return axiosClient.post('/register', user)
-        .then(({ data }) => {
-          commit('setUser', data)
-          return data;
-        })
+      return fetch('http://localhost:8000/api/register', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(user),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          commit('setUser', res);
+          return res;
+        });
     },
     logout({ commit }) {
-      return axiosClient.post('/logout')
-        .then(response => {
-          commit('logout')
-          return response;
-        });
+      commit('logout');
     },
   },
   mutations: {
     logout: state => {
       state.user.data = {};
       state.user.token = null;
+      sessionStorage.removeItem('TOKEN')
     },
 
     setUser: (state, userData) => {

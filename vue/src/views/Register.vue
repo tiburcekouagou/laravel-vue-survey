@@ -106,7 +106,7 @@ const user = {
 };
 
 function register() {
-  store.dispatch('register', user).then((res) => {
+  store.dispatch('register', user).then(() => {
     router.push({ name: 'Dashboard' });
   });
 }
