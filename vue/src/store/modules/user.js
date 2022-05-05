@@ -11,7 +11,7 @@ const tmpSurveys = [
     description: "My name is Tiburce Kouagou and I am the creator of Quizz App.. This is a very short description of the work that i did",
     created_at: "2022-05-04T18:00:00Z",
     updated_at: "2022-05-04T18:00:00Z",
-    expire_date: "04-05-2022",
+    expire_date: "2022-05-04T18:00:00Z",
     questions: [
       {
         id: 1,
@@ -142,6 +142,7 @@ export default {
       token: sessionStorage.getItem('TOKEN')
     },
     surveys: [...tmpSurveys],
+    questionTypes: ["text", 'select', 'radio', 'checkbox', 'textarea'],
   },
   getters: {},
   actions: {

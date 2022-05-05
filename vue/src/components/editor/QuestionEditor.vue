@@ -31,22 +31,24 @@
     <!--/ Question Index -->
     <div class="grid gap-3 grid-cols-12">
       <!-- Question -->
-      <label
-        :for="'question_text_' + model.data"
-        class="block text-sm font-medium text-gray-700"
-        >Question Text</label
-      >
-      <input
-        type="text"
-        :name="'question_text_' + model.data"
-        v-model="model.question"
-        @change="dataChange"
-        :id="'question_text_' + model.data"
-        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-      />
+      <div class="mt-3 col-span-9">
+        <label
+          :for="'question_text_' + model.data"
+          class="block text-sm font-medium text-gray-700"
+          >Question Text</label
+        >
+        <input
+          type="text"
+          :name="'question_text_' + model.data"
+          v-model="model.question"
+          @change="dataChange"
+          :id="'question_text_' + model.data"
+          class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+        />
+      </div>
       <!--/ Question -->
       <!-- Question Type -->
-      <div class="mt-3 col-spam-3">
+      <div class="mt-3 col-span-3">
         <label
           for="question_type"
           class="block text-sm font-medium text-gray-700"
@@ -82,11 +84,67 @@
       ></textarea>
     </div>
     <!--/ Question Description -->
+    <!-- Data -->
+    <div>
+      <div v-if="shouldHaveOptions()" class="mt-2">
+        <h4
+          class="text-sm font-semibold mb-1 flex justify-between items-center"
+        >
+          Options
+          <!-- Add new option -->
+          <button
+            type="button"
+            @click="addOption()"
+            class="flex items-center text-xs py-1 px-2 rounded-sm text-white bg-gray-600 hover:bg-gray-700"
+          >
+            <PlusIcon />
+            Add Option
+          </button>
+          <!--/ Add new option -->
+        </h4>
+
+        <div
+          v-if="!model.data.options.length"
+          class="text-xs text-gray-600 text-center py-3"
+        >
+          You don't have any options defined
+        </div>
+        <!-- Option List -->
+        <div
+          v-for="(option, index) in model.data.options"
+          :key="option.uuid"
+          class="flex items-center mb-1"
+        >
+          <span class="w-6 text-sm">{{ index + 1 }}.</span>
+          <input
+            type="text"
+            v-model="option.text"
+            @change="dataChange"
+            class="w-full rounded-sm py-1 px-2 text-xs border border-gray-300 focus:border-indigo-500"
+          />
+          <!-- Delete Option -->
+          <button
+            type="button"
+            @click="removeOption(option)"
+            class="h-6 w-6 text-red-500 rounded-full flex items-center justify-center border border-transparent transition-colors hover:border-red-100"
+          >
+            <TrashIcon />
+          </button>
+          <!--/ Delete Option -->
+        </div>
+        <!--/ Option List -->
+      </div>
+    </div>
+    <!--/ Data -->
+    <hr class="my-4" />
   </div>
 </template>
 
 <script setup>
+import store from '../../store';
+import { v4 as uuidv4 } from 'uuid';
 import { ref } from 'vue';
+import { computed } from '@vue/reactivity';
 import { PlusIcon } from '@heroicons/vue/outline';
 import { TrashIcon } from '@heroicons/vue/outline';
 
@@ -98,7 +156,9 @@ const props = defineProps({
 const emit = defineEmits(['change', 'addQuestion', 'deleteQuestion']);
 
 // Re-create the whole question data to avoid unintentional reference change
-const model = ref(JSON.stringify(props.question));
+const model = ref(props.question);
+// Get question types from vuex
+const questionTypes = computed(() => store.state.user.questionTypes);
 
 function upperCaseFirst(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -131,7 +191,7 @@ function typeChange() {
 }
 // Emit the data change
 function dataChange() {
-  const data = model.value;
+  const data = JSON.parse(JSON.stringify(model.value));
   if (!shouldHaveOptions()) {
     delete data.data.options;
   }
