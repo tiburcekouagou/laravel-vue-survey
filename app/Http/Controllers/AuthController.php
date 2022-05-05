@@ -63,7 +63,6 @@ class AuthController extends Controller {
         }
 
         $user = Auth::user();
-        dd($user);
         $token = $user->createToken('main')->plainTextToken;
 
         return response([
@@ -77,5 +76,9 @@ class AuthController extends Controller {
         $user = Auth::user();
         // Revoke the token that was used to authenticate the current request...
         $user->currentAccessToken()->delete();
+
+        return response([
+            'success' => true,
+        ]);
     }
 }
