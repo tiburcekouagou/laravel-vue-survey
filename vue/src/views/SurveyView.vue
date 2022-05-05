@@ -6,133 +6,167 @@
           {{ model.id ? model.title : 'Create a survey' }}
         </h1>
       </div>
-      <form @submit.prevent="saveSurvey">
-        <div class="shadow sm:rounded-md sm:overflow-hidden">
-          <!-- Survey Fields -->
-          <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-            <!-- Image -->
-            <div>
-              <label class="block text-sm font-medium text-gray-700">
-                Image
-              </label>
-              <div class="mt-1 flex items-center">
-                <img
-                  v-if="model.image"
-                  :src="model.image"
-                  :alt="model.title"
-                  class="w-64 h-48 object-cover"
-                />
-                <span
-                  v-else
-                  class="flex items-center justify-center h-12 w-12 rounded-full overflow-hidden bg-gray-100"
-                >
-                  <PhotographIcon class="w-[80%] h-[80%] text-gray-300" />
-                </span>
-                <button
-                  type="button"
-                  class="relative overflow-hidden ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  Change
-                </button>
-              </div>
-            </div>
-            <!--/ Image -->
-
-            <!-- Title -->
-            <div>
-              <label for="title" class="block text-sm font-medium text-gray-700"
-                >Title</label
-              >
-              <input
-                type="text"
-                name="title"
-                id="title"
-                v-model="model.title"
-                autocomplete="survey_title"
-                class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-sm"
-              />
-            </div>
-            <!--/ Title -->
-
-            <!-- Description -->
-            <div>
-              <label for="about" class="block text-sm font-medium text-gray-700"
-                >Description</label
-              >
-              <div class="mt-1">
-                <textarea
-                  name="description"
-                  rows="3"
-                  v-model="model.description"
-                  autocomplete="survey_description"
-                  class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-sm"
-                  placeholder="Describe your survey"
-                ></textarea>
-              </div>
-            </div>
-            <!--/ Description -->
-
-            <!-- Expired Date -->
-            <div>
-              <label
-                for="expire_date"
-                class="block text-sm font-medium text-gray-700"
-                >Expire Date</label
-              >
-              <input
-                type="date"
-                name="expire_date"
-                id="expire_date"
-                v-model="model.expire_date"
-                class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm border-gray-300 rounded-md"
-              />
-            </div>
-
-            <!--/ Expired Date -->
-
-            <!-- Status -->
-            <div class="flex items-start">
-              <div class="flex items-center h-5">
-                <input
-                  id="status"
-                  name="status"
-                  type="checkbox"
-                  v-model="model.status"
-                  class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                />
-              </div>
-              <div class="ml-3 text-sm">
-                <label for="status" class="font-medium text-gray-700"
-                  >Active</label
-                >
-              </div>
-            </div>
-            <!--/ Status -->
-          </div>
-          <!-- Survey Fields -->
-
-          <!-- Save Button -->
-          <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-            <button
-              type="submit"
-              class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Save
-            </button>
-          </div>
-          <!--/ Save Button -->
-        </div>
-      </form>
     </template>
+    <form @submit.prevent="saveSurvey">
+      <div class="shadow sm:rounded-md sm:overflow-hidden">
+        <!-- Survey Fields -->
+        <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+          <!-- Image -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Image
+            </label>
+            <div class="mt-1 flex items-center">
+              <img
+                v-if="model.image"
+                :src="model.image"
+                :alt="model.title"
+                class="w-64 h-48 object-cover"
+              />
+              <span
+                v-else
+                class="flex items-center justify-center h-12 w-12 rounded-full overflow-hidden bg-gray-100"
+              >
+                <PhotographIcon class="w-[80%] h-[80%] text-gray-300" />
+              </span>
+              <button
+                type="button"
+                class="relative overflow-hidden ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                <input
+                  type="file"
+                  class="absolute left-0 top-0 right-0 bottom-0 opacity-0 cursor-pointer"
+                />
+                Change
+              </button>
+            </div>
+          </div>
+          <!--/ Image -->
+
+          <!-- Title -->
+          <div>
+            <label for="title" class="block text-sm font-medium text-gray-700"
+              >Title</label
+            >
+            <input
+              type="text"
+              name="title"
+              id="title"
+              v-model="model.title"
+              autocomplete="survey_title"
+              class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-sm"
+            />
+          </div>
+          <!--/ Title -->
+
+          <!-- Description -->
+          <div>
+            <label for="about" class="block text-sm font-medium text-gray-700"
+              >Description</label
+            >
+            <div class="mt-1">
+              <textarea
+                name="description"
+                rows="3"
+                v-model="model.description"
+                autocomplete="survey_description"
+                class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-sm"
+                placeholder="Describe your survey"
+              ></textarea>
+            </div>
+          </div>
+          <!--/ Description -->
+
+          <!-- Expire Date -->
+          <div>
+            <label
+              for="expire_date"
+              class="block text-sm font-medium text-gray-700"
+              >Expire Date</label
+            >
+            <input
+              type="date"
+              name="expire_date"
+              id="expire_date"
+              v-model="model.expire_date"
+              class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm border-gray-300 rounded-md"
+            />
+          </div>
+
+          <!--/ Expire Date -->
+
+          <!-- Status -->
+          <div class="flex items-start">
+            <div class="flex items-center h-5">
+              <input
+                id="status"
+                name="status"
+                type="checkbox"
+                v-model="model.status"
+                class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              />
+            </div>
+            <div class="ml-3 text-sm">
+              <label for="status" class="font-medium text-gray-700"
+                >Active</label
+              >
+            </div>
+          </div>
+          <!--/ Status -->
+        </div>
+        <!-- Survey Fields -->
+
+        <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+          <h3 class="text-2xl font-semibold flex items-center justify-between">
+            Questions
+            <!-- Add new question -->
+            <button
+              type="button"
+              @click="addQuestion()"
+              class="flex items-center text-sm py-1 px-4 rounded-sm text-white bg-gray-600 hover:bg-gray-700"
+            >
+              <PlusIcon class="h-4 w-4 mr-2" />
+              Add Question
+            </button>
+            <!--/ Add new question -->
+          </h3>
+          <div v-if="!model.questions.length" class="text-center text-gray-600">
+            You don't have any question created
+          </div>
+          <div v-for="(question, index) in model.questions" :key="question.id">
+            <QuestionEditor
+              :question="question"
+              :index="index"
+              @change="questionChange"
+              @addQuestion="addQuestion"
+              @deleteQuestion="deleteQuestion"
+            />
+          </div>
+        </div>
+
+        <!-- Save Button -->
+        <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+          <button
+            type="submit"
+            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Save
+          </button>
+        </div>
+        <!--/ Save Button -->
+      </div>
+    </form>
   </PageComponent>
 </template>
 
 <script setup>
 import store from '../store';
 import PageComponent from '../components/PageComponent.vue';
+import QuestionEditor from '../components/editor/QuestionEditor.vue';
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { PhotographIcon } from '@heroicons/vue/outline';
+import { PlusIcon } from '@heroicons/vue/outline';
 
 const route = useRoute();
 
@@ -151,6 +185,10 @@ if (route.params.id) {
     (s) => s.id === parseInt(route.params.id)
   );
 }
+
+function addQuestion() {}
+function deleteQuestion() {}
+function questionChange() {}
 
 function saveSurvey() {}
 </script>

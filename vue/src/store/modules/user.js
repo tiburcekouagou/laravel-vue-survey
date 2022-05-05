@@ -11,7 +11,7 @@ const tmpSurveys = [
     description: "My name is Tiburce Kouagou and I am the creator of Quizz App.. This is a very short description of the work that i did",
     created_at: "2022-05-04T18:00:00Z",
     updated_at: "2022-05-04T18:00:00Z",
-    expire_date: "2022-05-04T18:00:00Z",
+    expire_date: "04-05-2022",
     questions: [
       {
         id: 1,
@@ -45,7 +45,7 @@ const tmpSurveys = [
       {
         id: 3,
         type: 'checkbox',
-        question: 'Which PHP framework videos do you want to see on my channel?',
+        question: 'Which PHP framework videos do you want to see on my channel ?',
         description: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Assumeda cumque earum",
         data: {
           options: [
@@ -58,7 +58,7 @@ const tmpSurveys = [
       {
         id: 4,
         type: 'radio',
-        question: 'Which Laravel frameword do you love the most?',
+        question: 'Which Laravel frameword do you love the most ?',
         description: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Assumeda cumque earum",
         data: {
           options: [
@@ -106,7 +106,7 @@ const tmpSurveys = [
     description: "Laravel is a free, open-source PHP web framework, created by Taylor Otwell and intended for the development of web applications following the model–view–controller (MVC) architectural pattern and based on Symfony. Some of the features of Laravel are a modular packaging system with a dedicated dependency manager, different ways for accessing relational databases, utilities that aid in application deployment and maintenance, and its orientation toward syntactic sugar",
     created_at: "2022-05-04 03:00:00",
     updated_at: "2022-05-04 03:00:00",
-    expire_at: "2022-05-04 03:00:00",
+    expire_date: "04/05/2022",
     questions: [],
   },
   {
@@ -115,7 +115,7 @@ const tmpSurveys = [
     slug: "vue-3",
     status: "active",
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1184px-Vue.js_Logo_2.svg.png",
-    description: "Vue.js (commonly referred to as Vue; pronounced \"view\") is an open-source model–view–viewmodel front end JavaScript framework for building user interfaces and single-page applications.[10] It was created by Evan You, and is maintained by him and the rest of the active core team members",
+    description: "Vue.js (commonly referred to as Vue; pronounced \"view\") is an open-source model–view–viewmodel front end JavaScript framework for building user interfaces and single-page applications. It was created by Evan You, and is maintained by him and the rest of the active core team members",
     created_at: "2022-05-04 03:00:00",
     updated_at: "2022-05-04 03:00:00",
     expire_at: "2022-05-04 03:00:00",
